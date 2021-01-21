@@ -1,32 +1,48 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const Button = (props) => {
-  console.log(props.voteArray)
+const Button = ({handleClick, text}) => {
   return (
-    <button onClick={props.handleClick}>
-      {props.text}
+    <button onClick={handleClick}>
+      {text}
     </button>
   )
   }
+
   
+
 const App = (props) => {
   const [selected, setSelected] = useState(0)
-  const [items, setItems] = useState([0,0,0])
-  const randomNumber = [Math.floor(Math.random()*anecdotes.length)]
+
+  //the votes array
+  const [items, setItems] = useState(
+    Array.apply(null, new Array(6)).map(Number.prototype.valueOf,0))
   
+  
+
+// handles picking a random quote
+  const randomNumber = [Math.floor(Math.random()*anecdotes.length)]
   const randomAnecdote = () => setSelected(randomNumber)
-  const copy = [...items]
+
+  //console.log("the current quote is a location",currentQuote)
   const vote = () => {
-    setItems(copy[selected]+1)
+    const copy = [...items]
+    console.log(copy)
+    console.log("this is copy at 0",copy[0])
+    copy[2] += 1
+    //this changes the votes array
+    console.log("copy is",copy)
+    setItems(copy)
+    
   }
+
+
+
+  
+  console.log("the votes array looks like", items)
   return (
     <div>
-      <ul>
-        {items.map(item=>(
-          <li key={item.id}>{item.value}</li>
-        ))}
-      </ul>
+     
       {props.anecdotes[selected]}<br/>
       <Button 
         handleClick={randomAnecdote}
