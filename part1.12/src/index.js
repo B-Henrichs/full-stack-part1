@@ -9,7 +9,20 @@ const Button = ({handleClick, text}) => {
   )
   }
 
-  
+  const QuoteOfTheDay = (props) => {
+    return (
+      <div>
+        <h1>Quote of the day</h1>
+      </div>
+    )
+    } 
+    const QuoteWithVotes = (props) => {
+      return (
+        <div>
+          <h1>Quote With The Most Votes</h1>
+        </div>
+      )
+      } 
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)
@@ -24,32 +37,40 @@ const App = (props) => {
   const randomNumber = [Math.floor(Math.random()*anecdotes.length)]
   const randomAnecdote = () => setSelected(randomNumber)
 
-  //console.log("the current quote is a location",currentQuote)
+  
   const vote = () => {
     const copy = [...items]
     console.log(copy)
-    console.log("this is copy at 0",copy[0])
-    copy[2] += 1
+    
+    copy[selected] += 1
     //this changes the votes array
     console.log("copy is",copy)
     setItems(copy)
     
   }
+  const highestVotes = items.indexOf(Math.max(...items))
+  console.log("highest vote is",highestVotes)
 
+  
 
 
   
   console.log("the votes array looks like", items)
   return (
     <div>
-     
+      <QuoteOfTheDay/>
       {props.anecdotes[selected]}<br/>
+      
       <Button 
         handleClick={randomAnecdote}
         text="next anecdote" />
       <Button
         text="vote"
         handleClick={vote}/>
+      <QuoteWithVotes /> 
+      {props.anecdotes[highestVotes]}
+      
+      
     </div>
   )
 }

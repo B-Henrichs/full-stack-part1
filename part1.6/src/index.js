@@ -16,6 +16,7 @@ return(
         <tr>
          <td>{props.text}</td>
          <td>{props.value}</td>
+         <td>{props.character}</td>
         </tr>
      </>
     
@@ -40,7 +41,7 @@ const Statistics = (props) => {
           <Statistic text="bad" value ={props.bad} />
           <Statistic text="total" value ={props.bad + props.good + props.neutral} />
           <Statistic text="average" value ={(props.good-props.bad)/(props.bad+props.good+props.neutral)} />
-          <Statistic text="% positive" value ={(props.good/(props.bad + props.good + props.neutral))*100} />
+          <Statistic text="positive" value ={(props.good/(props.bad + props.good + props.neutral))*100} character= '%' />
         </tbody>
       </table>  
     </div>
