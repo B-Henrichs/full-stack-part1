@@ -13,13 +13,22 @@ const Button = ({handleClick, text}) => {
     return (
       <div>
         <h1>Quote of the day</h1>
+        {props.quote}<p>has {props.voteCount} votes</p>
       </div>
     )
     } 
     const QuoteWithVotes = (props) => {
-      return (
+      if (Math.max(...props.items) === 0)
+      return(
         <div>
           <h1>Quote With The Most Votes</h1>
+          <p>no votes yet</p>
+        </div>
+      )
+      else return (
+        <div>
+          <h1>Quote With The Most Votes</h1>
+          {props.quote}
         </div>
       )
       } 
@@ -58,17 +67,15 @@ const App = (props) => {
   console.log("the votes array looks like", items)
   return (
     <div>
-      <QuoteOfTheDay/>
-      {props.anecdotes[selected]}<br/>
-      
-      <Button 
-        handleClick={randomAnecdote}
-        text="next anecdote" />
+      <QuoteOfTheDay quote={props.anecdotes[selected]} voteCount={items[selected]}/>
       <Button
         text="vote"
         handleClick={vote}/>
-      <QuoteWithVotes /> 
-      {props.anecdotes[highestVotes]}
+      <Button 
+        handleClick={randomAnecdote}
+        text="next quote" />
+      <QuoteWithVotes items={items} quote={props.anecdotes[highestVotes]} /> 
+      
       
       
     </div>
@@ -76,12 +83,12 @@ const App = (props) => {
 }
 
 const anecdotes = [
-  'Complexity reduces if we do difficult tasks often',
-  'Adding manpower to a late software project makes it later!',
-  'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
-  'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
-  'Premature optimization is the root of all evil.',
-  'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
+  '"Complexity reduces if we do difficult tasks often"-B. Henrichs',
+  '"Adding manpower to a late software project makes it later!"- Fred Brooks(Brooks Law)',
+  '"The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time."-Tom Cargill, Bell Labs',
+  '"Any fool can write code that a computer can understand. Good programmers write code that humans can understand."-Martin Fowler',
+  '"Premature optimization is the root of all evil."-Donald Knuth, The Art of Computer Programming',
+  '"Everyone knows that debugging is twice as hard as writing a program in the first place. So if you\'re as clever as you can be when you write it, how will you ever debug it?"-Brian Kernighan, Bell Labs'
 ]
 
 

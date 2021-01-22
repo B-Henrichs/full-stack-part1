@@ -22,8 +22,8 @@ return(
     
 )
 }
-const Statistics = (props) => {
- const total= props.bad + props.good + props.neutral
+const Statistics = ({good, neutral, bad}) => {
+ const total= bad + good + neutral
  
  if (total=== 0){
    return(
@@ -36,12 +36,12 @@ const Statistics = (props) => {
     <div>
       <table>
         <tbody>
-          <Statistic text="good" value ={props.good} />
-          <Statistic text="neutral" value ={props.neutral} />
-          <Statistic text="bad" value ={props.bad} />
-          <Statistic text="total" value ={props.bad + props.good + props.neutral} />
-          <Statistic text="average" value ={(props.good-props.bad)/(props.bad+props.good+props.neutral)} />
-          <Statistic text="positive" value ={(props.good/(props.bad + props.good + props.neutral))*100} character= '%' />
+          <Statistic text="good" value ={good} />
+          <Statistic text="neutral" value ={neutral} />
+          <Statistic text="bad" value ={bad} />
+          <Statistic text="total" value ={bad + good + neutral} />
+          <Statistic text="average" value ={(good-bad)/(bad+good+neutral)} />
+          <Statistic text="positive" value ={(good/(bad + good + neutral))*100} character= '%' />
         </tbody>
       </table>  
     </div>
